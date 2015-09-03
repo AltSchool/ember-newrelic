@@ -1,6 +1,6 @@
 {
   "name": "ember-newrelic",
-  "version": "0.0.5",
+  "version": "0.0.1",
   "description": "Add New Relic tracking to your Ember app.",
   "directories": {
     "doc": "doc",
