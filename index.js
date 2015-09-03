@@ -1,47 +1,37 @@
 /* jshint node: true */
 'use strict';
 
-function readContent(name) {
-  var fs = require('fs');
-  var path = require('path');
+var fs = require('fs');
+var path = require('path');
 
-  return fs.readFileSync(path.join(process.cwd(), 'node_modules', name, 'vendor/newrelic.js'), {
-    encoding: 'UTF-8'
-  });
+
+function readSnippet() {
+  try {
+    return fs.readFileSync(path.join(process.cwd(), 'vendor/new-relic-snippet.html'), {
+      encoding: 'UTF-8'
+    });
+  } catch(error) {
+    if (error.code === 'ENOENT') {
+      return '';
+    } else {
+      throw error;
+    }
+  }
 }
 
+
 module.exports = {
-  name: 'ember-analytics',
+  name: 'ember-newrelic',
 
   contentFor: function(type, config) {
     var content = '';
-    var newRelicConfig;
 
     if (config.environment !== 'test' && type === 'head') {
-      if (!config.newRelic) {
-        console.warn('`config.newRelic` is not defined, using environment variables instead.');
+      var content = readSnippet();
 
-        var envLicenseKey = process.env['NEWRELIC_LICENSE_KEY'];
-        var envApplicationId = process.env['NEWRELIC_APPLICATION_ID'];
-
-        if (!envLicenseKey || !envApplicationId) {
-          console.error('Environment variables `NEWRELIC_LICENSE_KEY` and `NEWRELIC_APPLICATION_ID` are not specfied. NewRelic will not be injected.');
-
-          return content;
-        }
-
-        newRelicConfig = {
-          licenseKey: envLicenseKey,
-          applicationId: envApplicationId
-        };
-      } else {
-        newRelicConfig = config.newRelic;
+      if (!content) {
+        console.warn('New Relic disabled: no snippet found, run `ember generate newrelic-license <app-name> <api-key>`');
       }
-
-      content = readContent(this.name);
-
-      content = content.replace(/{{applicationID}}/g, newRelicConfig.applicationId);
-      content = content.replace(/{{licenseKey}}/g, newRelicConfig.licenseKey);
     }
 
     return content;

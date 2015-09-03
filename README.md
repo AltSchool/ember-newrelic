@@ -1,7 +1,18 @@
-# Ember-analytics
+# ember-newrelic
 
-### NewRelic
+Adds `NewRelic` tracking to your Ember app.
 
-Adds `NewRelic` analytics on the page. Requires the parent project to specify `licenseKey` and `applicationId`
-either in `config/environment` under `newRelic` (`{ licenseKey: '', applicationId: '' }`) or
-set environment variables `NEWRELIC_LICENSE_KEY` and `NEWRELIC_APPLICATION_ID`.
+## Install
+
+```
+ember install git+ssh://git@github.com:AltSchool/ember-newrelic.git
+```
+
+## Generate New Relic Snippet
+
+You'll need to obtain an [API key](https://docs.newrelic.com/docs/apis/rest-api-v2/requirements/rest-api-key#viewing) from New Relic in order to run this command. Alternately you can copy and paste 
+the contents of the snippet into `vendor/new-relic-snippet.html`.
+
+```
+ember generate newrelic-license <app-name> <api-key>
+```
