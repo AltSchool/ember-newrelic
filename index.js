@@ -7,7 +7,7 @@ var path = require('path');
 
 function readSnippet() {
   try {
-    return fs.readFileSync(path.join(process.cwd(), 'vendor/new-relic-snippet.html'), {
+    return fs.readFileSync(path.join(process.cwd(), 'vendor/newrelic-snippet.html'), {
       encoding: 'UTF-8'
     });
   } catch(error) {

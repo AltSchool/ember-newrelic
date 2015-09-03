@@ -66,7 +66,7 @@ module.exports = {
   install: function(options) {
     var appName = options.args[1];
     var licenseKey = options.args[2];
-    var snippetFile = path.join(options.project.root, 'vendor/new-relic-snippet.html');
+    var snippetFile = path.join(options.project.root, 'vendor/newrelic-snippet.html');
 
     return rsvp.denodeify(getSnippetForApp)(appName, licenseKey)
       .then(function(snippet) {
