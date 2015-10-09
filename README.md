@@ -12,7 +12,7 @@ During the install process the latest New Relic snippet will be placed into `ven
 
 ## Configure
 
-To enable New Relic integration add the following configuration to `app/config/environment.js`
+To enable New Relic integration add the following configuration to `config/environment.js`
 
 ```
 ENV.newRelic = {
@@ -26,3 +26,4 @@ If you need to update or regenerate your snippet run:
 ```
 ember generate ember-newrelic
 ```
+
